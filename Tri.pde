@@ -1,6 +1,6 @@
 class Tri
 {
-  int numPoints = 3;
+  int numPoints = 0;
   int pt, destPt, newDestPt;
   PVector[] points = new PVector[numPoints];
   PVector[] targetPoints = new PVector[numPoints];
@@ -15,12 +15,12 @@ class Tri
   Tri(ArrayList cr, float ea, color c)
   {
     crosses = cr;
-    ease = map(speed, 0, 40, 0, .2);
+    ease = map(speed, 0, 40, .1, .2);
     col = c;
     r = red(col);
     g = green(col);
     b = blue(col);
-    a = map(humidity, 0, 100, 0, 200);
+    a = map(humidity, 0, 100, .1, 200);
     vert = true;
   }
 

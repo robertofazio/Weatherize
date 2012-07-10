@@ -32,12 +32,8 @@ import java.awt.image.BufferedImage;
 import ddf.minim.*;
 
 import oscP5.*;
-PImage img;
-
-//Full Screen
 import fullscreen.*; 
 SoftFullScreen fs;
-
 // variabili grafiche
 ArrayList trgs = new ArrayList();
 float defaultLoc = 100;
@@ -53,7 +49,7 @@ PFont font, fontH, fontB;
 ConfigurationBuilder cb;
 Twitter twitter;
 TwitterStream twitterStream;
-String user = "temporary";
+String user = "testStudioLab";
 
 // variabili OSC 
 OscP5 oscP5;
@@ -63,12 +59,13 @@ String host, oscP5event;
 // variabili per il parsing meteo
 int temp, humidity, code, temp_h;
 String country, meteo, ora, temp_newora, local_time, weather_img;
-String city = "barcelona";
+String city = "Verona";
 String data;
 String newora;
 String wt_img = "http://l.yimg.com/a/i/us/nws/weather/gr/" ;
 float visibility, speed;
 PImage img_url;
+PImage sfondo;
 
 // variabili per il salvataggio remoto
 String currentFormat = "png";
@@ -76,7 +73,7 @@ String currentFormat = "png";
 // variabili interfaccia
 boolean toggleInfos = true;
 //boolean toggleFeedback = false;
-String msg = "standby";
+// String msg = city;
 
 // variabili audio
 Minim minim;
@@ -84,15 +81,14 @@ AudioPlayer player;
 
 void setup()
 {
-  size(1024, 768);
+  size(1280, 1024);
   fs = new SoftFullScreen(this); 
-
-  img = loadImage("pattern.png");
-
+// fs.enter(); 
   font = loadFont("Georgia-Italic-14.vlw");
   fontH = loadFont("Georgia-BoldItalic-24.vlw");
   fontB = loadFont("Georgia-BoldItalic-38.vlw");
-
+  sfondo = loadImage("sfondo_DEF_1280_1024.jpg");
+  
   minim = new Minim(this);
   audio();
 
@@ -151,11 +147,12 @@ void setup()
       //*****************************************
       DataUpload du = new DataUpload();
       boolean bOK = false;
-      noLoop();
+      // noLoop();
       // Upload the currently displayed image with a fixed name, and the chosen format
       if (currentFormat.equals("png"))
       {
         bOK = du.UploadImage(city +"-" + user +"." + currentFormat, (BufferedImage) g.image);
+       
       }
       else
       {  
@@ -223,6 +220,7 @@ void setup()
 void draw()
 {
   background(0);
+ // image(sfondo,0,0);
   smooth();
   // ciclo tra i triangoli e chiamo il metodo che li anima
   for (int j=0; j<trgs.size(); j++)
@@ -262,7 +260,7 @@ void parseCity(String cn)
   }
   catch(Exception e)
   {
-    msg = "ops! Something went wrong. Try again!";
+  //  msg = "ops! Something went wrong. Try again!";
     toggleInfos = !toggleInfos;
     ////audio
     bianco();
@@ -408,20 +406,20 @@ void visualizeFeedback() {
 
   fill(0, 0, 0, 160);
   noStroke();
-  rect(0, 0, 1024, 70);
-  fill(255);
+  //rect(0, 0, 1280, 70);
+  //fill(255);
   textFont(fontH);
-  text(msg, 10, 40);
+//  text(msg, 10, 40);
 }
 
 void visualizeInfos() {
 
   fill(0, 0, 0, 160);
   noStroke();
-  rect(0, 0, 1024, 70);
+  rect(0, 0, 1280, 70);
   fill(255);
-  text("FPS  ", 10, 750);
-  text(frameRate, 35, 750);
+ // text("FPS  ", 10, 750);
+  //text(frameRate, 35, 750);
 
   fill(255);
   textFont(fontH);
@@ -470,7 +468,7 @@ void visualizeInfos() {
 
   //humidity
   float hum;
-  hum = map(humidity, 0, 100, 0, 200);
+  hum = map(humidity, 0, 100, 0, 255);
   fill(hum, humidity);
   for (float i=0; i<humidity; i+=1)
   {
@@ -545,7 +543,7 @@ void initOsc() {
 
   receiveAtPort = 12000;
   sendToPort = 10000;
-  host = "192.168.1.55";
+  host = "localhost";
 
   oscP5event = "oscEvent";
   oscP5 = new OscP5( this, host, sendToPort, receiveAtPort, oscP5event);
@@ -591,6 +589,10 @@ public void oscEvent(OscIn oscIn) {
   if (oscIn.addrPattern().equals("/1/push9")) {
 
     gr.selLineaOrz();
+    
+    println("select ORZ"+oscIn.getFloat(0));
+        
+
   }
 
   if (oscIn.addrPattern().equals("/1/push8")) {
@@ -611,6 +613,8 @@ public void oscEvent(OscIn oscIn) {
 
     toggleGrid = !toggleGrid;
     println("Active Grid "+oscIn.getFloat(0));
+    
+    
   }
 
   if (oscIn.addrPattern().equals("/1/toggle3")) {

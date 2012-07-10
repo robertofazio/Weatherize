@@ -12,7 +12,7 @@ class Griglia
     lineeVrt = new ArrayList();
     orzPos = 10;
     vertPos = 10;
-    step = st;
+    step = 8;
   }
 
   void update()
@@ -231,7 +231,7 @@ class Griglia
       linesV[i] = tempX+"\t";
     }
     saveStrings("data/linesV.txt", linesV);
-    
+
     String[] linesO = new String[lineeOrz.size()];
     for (int j = 0; j<lineeOrz.size(); j++)
     {
@@ -274,3 +274,4 @@ class Griglia
     return lineeVrt.size();
   }
 }
+

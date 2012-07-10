@@ -4,7 +4,7 @@ class Linea
   float x, y;
   color col = 255;
   color selCol = color(255, 0, 0);
-  int strk = 1;
+  int strk = 2;
   public boolean selected = true;
   public int ID;
 
