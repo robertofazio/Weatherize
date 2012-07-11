@@ -1,6 +1,6 @@
 class Tri
 {
-  int numPoints = 0;
+  int numPoints = 3;
   int pt, destPt, newDestPt;
   PVector[] points = new PVector[numPoints];
   PVector[] targetPoints = new PVector[numPoints];
