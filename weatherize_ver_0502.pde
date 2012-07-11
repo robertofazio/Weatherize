@@ -157,12 +157,12 @@ void setup()
   // ********************************************************************************************************************************************************************
   // TWITTER JAVA LIBRARY
 
-  //Credentials
+  //Credentials - register your app as developer and use your OAuth Key https://dev.twitter.com/
   cb = new ConfigurationBuilder();
-  cb.setOAuthConsumerKey("AD9VvWX9sfTGd43bDhuHg");
-  cb.setOAuthConsumerSecret("zeWaFFSUqIPfWYBVyuCpoA5Dvvw1wxgfkXysOH5ZY");
-  cb.setOAuthAccessToken("521363782-YFuoGlJNJic6D8Zh0Jn3clAYuEzI2FDphKhN8Qg2");
-  cb.setOAuthAccessTokenSecret("I2kxvAUSMaTrRjQMBuqJh3xFKx1OzPBLl7P3DQ2oc");
+  cb.setOAuthConsumerKey("*********************");
+  cb.setOAuthConsumerSecret("*********************");
+  cb.setOAuthAccessToken("*********************");
+  cb.setOAuthAccessTokenSecret("*********************");
 
   StatusListener listener = new StatusListener()
   {
