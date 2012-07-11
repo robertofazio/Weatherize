@@ -124,7 +124,7 @@ void setup()
   font = loadFont("Georgia-Italic-14.vlw");
   fontH = loadFont("Georgia-BoldItalic-24.vlw");
   fontB = loadFont("Georgia-BoldItalic-38.vlw");
-  sfondo = loadImage("sfondo_DEF_1280_1024.jpg");
+//  sfondo = loadImage("sfondo_DEF_1280_1024.jpg");
   
   minim = new Minim(this);
   audio();
@@ -184,7 +184,7 @@ void setup()
       //*****************************************
       DataUpload du = new DataUpload();
       boolean bOK = false;
-      // noLoop();
+       noLoop();
       // Upload the currently displayed image with a fixed name, and the chosen format
       if (currentFormat.equals("png"))
       {
